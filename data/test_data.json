@@ -1,0 +1,7 @@
+{
+  "new_user" :{
+      "name": "Harshit QA",
+      "username" : "QA user",
+      "email" : "qa@example.com"
+  }
+}
