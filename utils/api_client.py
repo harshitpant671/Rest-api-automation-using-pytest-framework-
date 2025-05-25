@@ -3,11 +3,11 @@ from http.client import responses
 import requests
 
 class APIClient:
-    BASE_URL = ""
+    BASE_URL = "https://jsonplaceholder.typicode.com"
 
     def __init__(self):
         self.headers = {
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         }
 
     def get(self, endpoint ):
