@@ -32,10 +32,8 @@ def test_create_users(api_client, load_user_data):
     assert response.json()['name'] == user_data['name']
     
     # Extract ID and fetch user
-    user_id = response.json().get('id')
-    assert user_id is not None, "User ID not returned in POST response"
-    
-    responseget = api_client.get(f"users/{user_id}/")
+    id = response.json()['id']    
+    responseget = api_client.get(f"users/{id}/")
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
