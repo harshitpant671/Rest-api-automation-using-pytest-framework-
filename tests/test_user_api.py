@@ -33,6 +33,7 @@ def test_create_users(api_client, load_user_data):
     
     # Extract ID and fetch user
     id = response.json()['id']    
+    print(id);
     responseget = api_client.get(f"users/{id}")
     print("GET response:", responseget.json())
 
