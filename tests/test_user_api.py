@@ -33,11 +33,11 @@ def test_create_users(api_client, load_user_data):
     
     # Extract ID and fetch user
     id = response.json()['id']    
-    responseget = api_client.get(f"users/10")
+    responseget = api_client.get(f"users/{id}")
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
-    assert responseget.json()['name'] == 'Clementina DuBuque'
+    assert responseget.json()['name'] == user_data['name]'
 
 
 def test_update_users(api_client):
