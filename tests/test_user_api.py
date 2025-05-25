@@ -17,25 +17,31 @@ def test_get_users(api_client):
 
 def test_create_users(api_client, load_user_data):
     user_data = load_user_data["new_user"]
-    
-    # # Set known values for consistency
-    # user_data["name"] = "Harshit QA"
-    # user_data["username"] = "qa_user"
+
+    # Ensure unique email to avoid conflicts
     # user_data["email"] = f"{uuid.uuid4().hex[:8]}@example.com"
-    
-    print(f"Generated email: {user_data['email']}")
-    
-    # POST to create user
+    # print(f"Generated email: {user_data['email']}")
+
+    unique_email = f"{uuid.uuid4().hex[:8]}@gmail.com"
+    print(unique_email)
+    user_data["email"] = unique_email
+
+    # Create user
     response = api_client.post("users", user_data)
     print("POST response:", response.json())
+
     assert response.status_code == 201
     assert response.json()['name'] == user_data['name']
-    
-    responseget = api_client.get(f"users/9")
+
+    # Extract created user's ID
+    user_id = response.json()['id']
+
+    # Retrieve the same user using GET
+    responseget = api_client.get(f"users/{user_id}")
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
-    assert responseget.json()['name'] == 'Glenna Reichert'
+    assert responseget.json()['name'] == user_data['name']
 
 
 def test_update_users(api_client):
