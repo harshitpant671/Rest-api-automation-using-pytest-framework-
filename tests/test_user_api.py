@@ -16,28 +16,31 @@ def test_get_users(api_client):
     assert len(response.json()) > 0
 
 def test_create_users(api_client, load_user_data):
-    # user_data ={
-    #     'name': 'Harshit QA',
-    #     'username' : 'QA user',
-    #     'email' : 'qa@example.com'
-    # }
-
     user_data = load_user_data["new_user"]
-    unique_email = f"{uuid.uuid4().hex[:8]}@example.com"
-    print(unique_email)
-    user_data["email"] = unique_email
     
-
+    # Set known values for consistency
+    user_data["name"] = "Harshit QA"
+    user_data["username"] = "qa_user"
+    user_data["email"] = f"{uuid.uuid4().hex[:8]}@example.com"
+    
+    print(f"Generated email: {user_data['email']}")
+    
+    # POST to create user
     response = api_client.post("users", user_data)
-    print(response.json())
+    print("POST response:", response.json())
     assert response.status_code == 201
-    assert response.json()['name'] == 'Harshit QA'
-
-    user_id = response.json()['id']
+    assert response.json()['name'] == user_data['name']
+    
+    # Extract ID and fetch user
+    user_id = response.json().get('id')
+    assert user_id is not None, "User ID not returned in POST response"
+    
     responseget = api_client.get(f"users/{user_id}/")
-    print(responseget.json())
+    print("GET response:", responseget.json())
+
     assert responseget.status_code == 200
-    assert responseget.json()['name'] == 'Clementina DuBuque'
+    assert responseget.json()['name'] == user_data['name']
+
 
 def test_update_users(api_client):
     user_data ={
