@@ -30,6 +30,8 @@ def test_create_users(api_client, load_user_data):
     print("POST response:", response.json())
     assert response.status_code == 201
     assert response.json()['name'] == user_data['name']
+    response = api_client.get("users")
+    print(response.json())
     
     # Extract ID and fetch user
     id = response.json()['id']    
