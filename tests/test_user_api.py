@@ -31,7 +31,7 @@ def test_create_users(api_client, load_user_data):
     assert response.status_code == 201
     assert response.json()['name'] == user_data['name']
     
-    responseget = api_client.get(f"users/11")
+    responseget = api_client.get(f"users/9")
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
