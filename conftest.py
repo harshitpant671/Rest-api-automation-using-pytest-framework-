@@ -18,5 +18,5 @@ def setup_teardown():
 @pytest.fixture
 def load_user_data():
     json_file_path = os.path.join(os.path.dirname(__file__), 'testdata', 'data.json')
-        with open(file_path, 'r') as f:
-            return json.load(f)
+    with open(file_path, 'r') as f:
+        return json.load(f)
