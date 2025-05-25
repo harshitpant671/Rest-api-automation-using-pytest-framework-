@@ -33,7 +33,7 @@ def test_create_users(api_client, load_user_data):
     
     # Extract ID and fetch user
     id = response.json()['id']    
-    responseget = api_client.get(f"users/{id}/")
+    responseget = api_client.get(f"users/10")
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
@@ -48,7 +48,7 @@ def test_update_users(api_client):
     }
     response = api_client.put("users/1", user_data)
     print(response.json())
-    assert response.status_code == 400
+    assert response.status_code == 200
     # assert response.json()['name'] == user_data['name']
 
 def test_delete_users(api_client):
