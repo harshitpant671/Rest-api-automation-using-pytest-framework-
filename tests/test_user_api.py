@@ -1,5 +1,6 @@
 from http.client import responses
 import pytest
+import json
 import uuid
 from conftest import load_user_data
 from utils.api_client import APIClient
@@ -27,7 +28,11 @@ def test_create_users(api_client, load_user_data):
     user_data["email"] = unique_email
     
 
-    response = api_client.post("users", json=user_data)
+    response = api_client.post(
+        "users",
+        data=json.dumps(user_data),
+        headers= self.headers
+    )    
     print(response.json())
     assert response.status_code == 201
     assert response.json()['name'] == 'Harshit QA'
@@ -41,8 +46,8 @@ def test_create_users(api_client, load_user_data):
 def test_update_users(api_client):
     user_data ={
         'name': 'Suraj QA',
-        'username' : 'QA team',
-        'email' : 'surajqa@example.com'
+        'username': 'QA team',
+        'email': 'surajqa@example.com'
     }
     response = api_client.put("users/1", user_data)
     print(response.json())
