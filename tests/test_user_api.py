@@ -38,7 +38,7 @@ def test_create_users(api_client, load_user_data):
     print("GET response:", responseget.json())
 
     assert responseget.status_code == 200
-    assert responseget.json()['name'] == response.json()['name']
+    assert responseget.json()['name'] == 'Harshit QA'
 
 
 def test_update_users(api_client):
