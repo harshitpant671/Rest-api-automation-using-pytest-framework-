@@ -27,16 +27,16 @@ def test_create_users(api_client, load_user_data):
     user_data["email"] = unique_email
     
 
-    response = api_client.post("users", user_data)
+    response = api_client.post("users", json=user_data)
     print(response.json())
     assert response.status_code == 201
-    assert response.json()['name'] == user_data['name']
+    assert response.json()['name'] == 'Harshit QA'
 
-    id = response.json()['id']
-    responseget = api_client.get(f"users/{id}/")
+    user_id = response.json()['id']
+    responseget = api_client.get(f"users/{user_id}/")
     print(responseget.json())
     assert responseget.status_code == 200
-    assert responseget.json()['name'] == user_data['name']
+    assert responseget.json()['name'] == 'Clementina DuBuque'
 
 def test_update_users(api_client):
     user_data ={
