@@ -28,11 +28,7 @@ def test_create_users(api_client, load_user_data):
     user_data["email"] = unique_email
     
 
-    response = api_client.post(
-        "users",
-        data=json.dumps(user_data),
-        headers= self.headers
-    )    
+    response = api_client.post("users", user_data)
     print(response.json())
     assert response.status_code == 201
     assert response.json()['name'] == 'Harshit QA'
