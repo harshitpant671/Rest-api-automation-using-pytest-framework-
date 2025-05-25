@@ -16,8 +16,6 @@ def setup_teardown():
     print("\nTearing down resources...")
 
 @pytest.fixture
-def load_user_data():
-    json_file_path = os.path.join(os.path.dirname(__file__),"data","test_data.json")
-    with open(json_file_path) as json_file:
-        data = json.load(json_file)
-    return data
+file_path = os.path.join(os.path.dirname(__file__), 'testdata', 'data.json')
+    with open(file_path, 'r') as f:
+        return json.load(f)
